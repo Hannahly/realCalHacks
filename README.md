@@ -1,0 +1,2 @@
+# realCalHacks
+Music Sentiment Reader
