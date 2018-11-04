@@ -16,6 +16,7 @@ def main():
 	if lyrics.empty:
 		print("Invalid artist or no available songs")
 		return
+		
 	if not Path('output/').exists():
 		Path('output').mkdir();
 
