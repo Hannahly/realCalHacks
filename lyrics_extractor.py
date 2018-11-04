@@ -11,11 +11,13 @@ def main():
 	lyrics = pd.read_csv('songdata.csv')
 	lyrics['text'] = lyrics['text'].str.replace('\\n', '')
 	lyrics = lyrics[lyrics['artist'] == artist.replace('_', ' ')]
-	dest_path = artist + '.txt'
+	dest_path = 'output/' + artist + '.txt'
 
 	if lyrics.empty:
 		print("Invalid artist or no available songs")
 		return
+	if not Path('output/').exists():
+		Path('output').mkdir();
 
 	try:
 		print('Writing to file ' + dest_path + '...')
