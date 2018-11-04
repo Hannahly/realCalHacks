@@ -1,16 +1,23 @@
 import csv
+import sys
 import numpy as np
 import pandas as pd
 import zipfile
 from pathlib import Path
 
-lyrics = pd.read_csv('songdata.csv')
-lyrics['text'] = lyrics['text'].str.replace('\\n', '')
 
-print('Writing to file lyrics.csv ...')
-dest_path = 'lyrics.csv'
-lyrics[['text']].to_csv(Path(dest_path), ' ')
+def main():
+	artist = sys.argv[1]
+	lyrics = pd.read_csv('songdata.csv')
+	lyrics['text'] = lyrics['text'].str.replace('\\n', '')
+	lyrics = lyrics[lyrics['artist'] == artist.replace('_', ' ')]
+	dest_path = artist + '.txt'
 
-print('Finished.')
-# print(lyrics.describe())
-# artist, song, link, text
+	try:
+		print('Writing to file ' + dest_path + '...')
+		lyrics[['text']].iloc[0:200].to_csv(Path(dest_path), ' ')
+	except:
+		print('Error occurred')
+
+if __name__ == "__main__": main()
+
