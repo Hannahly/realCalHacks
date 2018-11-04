@@ -13,6 +13,10 @@ def main():
 	lyrics = lyrics[lyrics['artist'] == artist.replace('_', ' ')]
 	dest_path = artist + '.txt'
 
+	if lyrics.empty:
+		print("Invalid artist or no available songs")
+		return
+
 	try:
 		print('Writing to file ' + dest_path + '...')
 		lyrics[['text']].iloc[0:200].to_csv(Path(dest_path), ' ')
